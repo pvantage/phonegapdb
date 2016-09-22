@@ -16,14 +16,19 @@ document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
         db = window.openDatabase("firstdb", "1.0", "First DB", 200000);
         db.transaction(Showresults, errorCB, successCB);
+		
     }
 function errorCB(tx, err){
 	alert('Error: '+err.code);
 }
+function successCB()
+{
+	alert('DB exist.');
+}
 function Showresults(tx){
-	var sql="SELECT * FROM USERS"
-	tx.executeSql(sql,[],listResults,errorDb);
 	alert('proceed..');
+	tx.executeSql('SELECT * FROM USERS', [], listResults, errorCB);
+	
 }
 function listResults(tx,results){
   var html='<table width="100%" border="0">';
