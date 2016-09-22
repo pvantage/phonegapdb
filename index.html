@@ -5,8 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
-<script type="text/javascript" src="jquery.js"></script>
+
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -26,14 +27,14 @@ function successCB(){
 	alert('BD Done');
 }
 function InsertUser(tx){
+	
+}
+function submitform(){
 	var usr=jQuery('#username').val();
 	alert(usr);
 	var pwd=jQuery('#pwd').val();
 	var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
 	tx.executeSql(sql, [],queryDb,errorCB);
-}
-function submitform(){
-	db.transaction(InsertUser, errorCB);
 	//window.location='show.html';
 	return false;
 }
