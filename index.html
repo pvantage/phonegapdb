@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+document.addEventListener("deviceready", Onreadydevice, false);
+var db;
+function Onreadydevice(){
+	db=window.openDatabase('oursite', '1.0', 'Our Site', 1000000);
+	db.transaction(CreatTable, errorDb, successDB);
+}
+function CreatTable(tx)
+{
+	//tx.executeSql('DROP TABLE IF EXISTS users');
+	tx.executeSql('CREATE TABLE IF EXISTS users (username,user_pass)');
+}
+function errorDb(err){
+	alert('Error: '+err.code);
+}
+function successDB(){
+	alert('BD Done');
+}
+function InsertUser(tx){
+	var usr=jQuery('#username').val();
+	var pwd=jQuery('#pwd').val();
+	var sql="INSERT INTO users (username,user_pass)"
+	tx.executeSql(sql,[usr,pwd],queryDb,errorDb);
+}
+function submitform(){
+	db.transaction(InsertUser, errorDb);
+	return false;
+}
+</script>
+</head>
+
+<body>
+<div class="wrapper">
+ 
+      <form name="loginuser" id="loginuser" onSubmit="return submitform();" action="" method="post">
+	  <table width="100%" border="0">
+	  <tr>
+		<td><input type="text" class="required form-control" name="username" id="username"   placeholder="User Name"></td>
+	  </tr>
+	  <tr>
+		<td><input type="password" class="required form-control" name="pwd" id="pwd"  placeholder="Password"></td>
+	  </tr>
+	  <tr>
+		<td><input class="btn btn-primary" type="submit" value="Login"></td>
+	  </tr>
+	</table>
+      </form>
+</div>
+</body>
+</html>

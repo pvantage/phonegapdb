@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Show</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+document.addEventListener("deviceready", Onreadydevice, false);
+var db;
+function Onreadydevice(){
+	db=window.openDatabase('oursite', '1.0', 'Our Site', 1000000);
+	db.transaction(Showresults, errorDb, successDB);
+}
+
+function Showresults(tx){
+	var sql="SELECT * FROM users"
+	tx.executeSql(sql,[],listResults,errorDb);
+}
+function listResults(tx,results){
+  var html='<table width="100%" border="0">';
+  var totalrecords=results.rows.length;
+  for(var i=0;i<totalrecords;i++)
+  {
+  	html+='<tr><td>Username:</td><td>'+results.rows.item(i).username+'</td></tr>';
+	html+='<tr><td>Password:</td><td>'+results.rows.item(i).user_pass+'</td></tr>';
+	html+='<tr><td colspan="2"><hr /></td></tr>';
+  }
+  html+='</table>';
+}
+</script>
+</head>
+
+<body>
+<div class="wrapper">
+ 
+	  <table width="100%" border="0">
+	  <tr><td></td></tr>
+	  <tr>
+		<td></td>
+	  </tr>
+	  
+	</table>
+</div>
+</body>
+</html>
