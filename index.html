@@ -21,7 +21,7 @@ function populateDB(tx)
 	tx.executeSql('CREATE TABLE IF EXISTS users (username,user_pass)');
 }
 function errorCB(tx, err){
-	alert('Error: '+err);
+	alert('Error: '+err.code);
 }
 function successCB(){
 	alert('BD Done');
@@ -30,14 +30,15 @@ function InsertUser(tx){
 	var usr=jQuery('#username').val();
 	var pwd=jQuery('#pwd').val();
 	var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
-	tx.executeSql(sql,[],queryDb,errorCB);
+	tx.executeSql(sql);
 }
 function submitform(){
 	db.transaction(InsertUser, errorCB);
+	window.location='show.html';
 	return false;
 }
 function queryDb(){
-	window.location='show.html';
+	
 }
 </script>
 </head>

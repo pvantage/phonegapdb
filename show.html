@@ -15,7 +15,7 @@ function onDeviceReady(){
 	db.transaction(Showresults, errorCB, successCB);
 }
 function errorCB(tx, err){
-	alert('Error: '+err);
+	alert('Error: '+err.code);
 }
 function Showresults(tx){
 	var sql="SELECT * FROM users"
