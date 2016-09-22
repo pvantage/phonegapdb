@@ -12,27 +12,27 @@ document.addEventListener("deviceready", Onreadydevice, false);
 var db;
 function Onreadydevice(){
 	db=window.openDatabase('oursite', '1.0', 'Our Site', 1000000);
-	db.transaction(CreatTable, errorDb, successDB);
+	db.transaction(CreatTable, errorCB, successCB);
 }
 function CreatTable(tx)
 {
 	//tx.executeSql('DROP TABLE IF EXISTS users');
-	tx.executeSql('CREATE TABLE IF EXISTS users (username,user_pass)');
+	tx.executeSql('CREATE TABLE IF EXISTS users (id unique, username,user_pass)');
 }
-function errorDb(err){
+function errorCB(err){
 	alert('Error: '+err.code);
 }
-function successDB(){
+function successCB(){
 	alert('BD Done');
 }
 function InsertUser(tx){
 	var usr=jQuery('#username').val();
 	var pwd=jQuery('#pwd').val();
-	var sql="INSERT INTO users (username,user_pass)"
-	tx.executeSql(sql,[usr,pwd],queryDb,errorDb);
+	var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
+	tx.executeSql(sql,[],queryDb,errorCB);
 }
 function submitform(){
-	db.transaction(InsertUser, errorDb);
+	db.transaction(InsertUser, errorCB);
 	return false;
 }
 function queryDb(){
