@@ -9,16 +9,19 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
 document.addEventListener("deviceready", onDeviceReady, false);
-var db;
-function onDeviceReady(){
-	db=window.openDatabase('oursite', '1.0', 'Our Site', 200000);
-	db.transaction(Showresults, errorCB, successCB);
-}
+
+    // PhoneGap is ready
+    //
+	var db;
+    function onDeviceReady() {
+        db = window.openDatabase("firstdb", "1.0", "First DB", 200000);
+        db.transaction(Showresults, errorCB, successCB);
+    }
 function errorCB(tx, err){
 	alert('Error: '+err.code);
 }
 function Showresults(tx){
-	var sql="SELECT * FROM users"
+	var sql="SELECT * FROM USERS"
 	tx.executeSql(sql,[],listResults,errorDb);
 }
 function listResults(tx,results){
