@@ -9,8 +9,38 @@
 <script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
 
 <script type="text/javascript">
+// Wait for PhoneGap to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-document.addEventListener("deviceready", onDeviceReady, false);
+    // PhoneGap is ready
+    //
+    function onDeviceReady() {
+        var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
+        db.transaction(populateDB, errorCB, successCB);
+    }
+
+    // Populate the database 
+    //
+    function populateDB(tx) {
+         tx.executeSql('DROP TABLE IF EXISTS DEMO');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    }
+
+    // Transaction error callback
+    //
+    function errorCB(tx, err) {
+        alert("Error processing SQL: "+err);
+    }
+
+    // Transaction success callback
+    //
+    function successCB() {
+        alert("success!");
+    }
+/*document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady(){
 	var db=window.openDatabase('oursite', '1.0', 'Our Site', 200000);
 	db.transaction(CreatTable, errorCB, successCB);
@@ -28,18 +58,16 @@ function successCB(){
 	alert('BD Done');
 }
 
-function queryDb(){
-	alert('data added.');
-}
+
 function submitform(){
 	var usr=jQuery('#username').val();
 	alert(usr);
 	var pwd=jQuery('#pwd').val();
 	var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
-	tx.executeSql(sql, [],queryDb,errorCB);
+	tx.executeSql(sql);
 	//window.location='show.html';
 	return false;
-}
+}*/
 
 </script>
 </head>
@@ -47,7 +75,7 @@ function submitform(){
 <body>
 <div class="wrapper">
  
-      <form name="loginuser" id="loginuser" onSubmit="return submitform();" action="" method="post">
+      <form name="loginuser" id="loginuser" onSubmit="return submitform();" action="show.html" method="post">
 	  <table width="100%" border="0">
 	  <tr>
 		<td><input type="text" class="required form-control" name="username" id="username"   placeholder="User Name"></td>
