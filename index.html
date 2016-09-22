@@ -15,18 +15,17 @@
 
     // PhoneGap is ready
     //
+	var db;
     function onDeviceReady() {
-        var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
+        db = window.openDatabase("firstdb", "1.0", "First DB", 200000);
         db.transaction(populateDB, errorCB, successCB);
     }
 
     // Populate the database 
     //
     function populateDB(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS DEMO');
-         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+         tx.executeSql('DROP TABLE IF EXISTS USERS');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (username,user_pass)');
     }
 
     // Transaction error callback
@@ -40,34 +39,21 @@
     function successCB() {
         alert("success!");
     }
-/*document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady(){
-	var db=window.openDatabase('oursite', '1.0', 'Our Site', 200000);
-	db.transaction(CreatTable, errorCB, successCB);
-}
-function CreatTable(tx)
-{
-	tx.executeSql('DROP TABLE IF EXISTS users');
-	tx.executeSql('CREATE TABLE IF EXISTS users (username,user_pass)');
-	alert('table created.');
-}
-function errorCB(tx, err){
-	alert('Error: '+err.code);
-}
-function successCB(){
-	alert('BD Done');
-}
-
+function insertCB() {
+        alert("Done!");
+    }
 
 function submitform(){
 	var usr=jQuery('#username').val();
 	alert(usr);
 	var pwd=jQuery('#pwd').val();
-	var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
-	tx.executeSql(sql);
-	//window.location='show.html';
+	
+	db.transaction(function (tx) {
+		var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
+		tx.executeSql(sql,[],insertCB,errorCB);
+	});
 	return false;
-}*/
+}
 
 </script>
 </head>
