@@ -15,7 +15,7 @@ function onDeviceReady(){
 	var db=window.openDatabase('oursite', '1.0', 'Our Site', 200000);
 	db.transaction(CreatTable, errorCB, successCB);
 }
-function populateDB(tx)
+function CreatTable(tx)
 {
 	tx.executeSql('DROP TABLE IF EXISTS users');
 	tx.executeSql('CREATE TABLE IF EXISTS users (username,user_pass)');
@@ -26,8 +26,9 @@ function errorCB(tx, err){
 function successCB(){
 	alert('BD Done');
 }
-function InsertUser(tx){
-	
+
+function queryDb(){
+	alert('data added.');
 }
 function submitform(){
 	var usr=jQuery('#username').val();
@@ -38,9 +39,7 @@ function submitform(){
 	//window.location='show.html';
 	return false;
 }
-function queryDb(){
-	alert('data added.');
-}
+
 </script>
 </head>
 
