@@ -14,6 +14,9 @@ function onDeviceReady(){
 	db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
 	db.transaction(Showresults, errorCB, successCB);
 }
+function errorCB(tx, err){
+	alert('Error: '+err);
+}
 function Showresults(tx){
 	var sql="SELECT * FROM users"
 	tx.executeSql(sql,[],listResults,errorDb);

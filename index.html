@@ -15,13 +15,13 @@ function onDeviceReady(){
 	db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
 	db.transaction(CreatTable, errorCB, successCB);
 }
-function CreatTable(tx)
+function populateDB(tx)
 {
-	//tx.executeSql('DROP TABLE IF EXISTS users');
-	tx.executeSql('CREATE TABLE IF EXISTS users (id unique, username,user_pass)');
+	tx.executeSql('DROP TABLE IF EXISTS users');
+	tx.executeSql('CREATE TABLE IF EXISTS users (username,user_pass)');
 }
-function errorCB(err){
-	alert('Error: '+err.code);
+function errorCB(tx, err){
+	alert('Error: '+err);
 }
 function successCB(){
 	alert('BD Done');
