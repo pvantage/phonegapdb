@@ -23,17 +23,17 @@ function errorCB(tx, err){
 }
 function successCB()
 {
-	alert('DB exist.');
+	//alert('DB exist.');
 }
 function Showresults(tx){
-	alert('proceed..');
+	//alert('proceed..');
 	tx.executeSql('SELECT * FROM USERS', [], listResults, errorCB);
 	
 }
 function listResults(tx,results){
   var html='<table width="100%" border="0">';
   var totalrecords=results.rows.length;
-  alert(totalrecords);
+ // alert(totalrecords);
   for(var i=0;i<totalrecords;i++)
   {
   	html+='<tr><td>Username:</td><td>'+results.rows.item(i).username+'</td></tr>';

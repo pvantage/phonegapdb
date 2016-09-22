@@ -24,7 +24,7 @@
     // Populate the database 
     //
     function populateDB(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS USERS');
+         //tx.executeSql('DROP TABLE IF EXISTS USERS');
          tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (username,user_pass)');
     }
 
