@@ -11,7 +11,7 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 var db;
 function onDeviceReady(){
-	db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
+	db=window.openDatabase('oursite', '1.0', 'Our Site', 200000);
 	db.transaction(Showresults, errorCB, successCB);
 }
 function errorCB(tx, err){

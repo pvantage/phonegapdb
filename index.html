@@ -11,7 +11,7 @@
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady(){
-	var db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
+	var db=window.openDatabase('oursite', '1.0', 'Our Site', 200000);
 	db.transaction(CreatTable, errorCB, successCB);
 }
 function populateDB(tx)
@@ -38,7 +38,7 @@ function submitform(){
 	return false;
 }
 function queryDb(){
-	alert('data added');
+	alert('data added.');
 }
 </script>
 </head>
