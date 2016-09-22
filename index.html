@@ -10,9 +10,8 @@
 <script type="text/javascript">
 
 document.addEventListener("deviceready", onDeviceReady, false);
-var db;
 function onDeviceReady(){
-	db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
+	var db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
 	db.transaction(CreatTable, errorCB, successCB);
 }
 function populateDB(tx)
@@ -28,9 +27,10 @@ function successCB(){
 }
 function InsertUser(tx){
 	var usr=jQuery('#username').val();
+	alert(usr);
 	var pwd=jQuery('#pwd').val();
 	var sql="INSERT INTO users (username,user_pass) VALUES('"+usr+"','"+pwd+"')"
-	tx.executeSql(sql);
+	tx.executeSql(sql, [],queryDb,errorCB);
 }
 function submitform(){
 	db.transaction(InsertUser, errorCB);
@@ -38,7 +38,7 @@ function submitform(){
 	return false;
 }
 function queryDb(){
-	
+	alert('data added');
 }
 </script>
 </head>
