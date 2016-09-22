@@ -8,10 +8,11 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-document.addEventListener("deviceready", Onreadydevice, false);
+
+document.addEventListener("deviceready", onDeviceReady, false);
 var db;
-function Onreadydevice(){
-	db=window.openDatabase('oursite', '1.0', 'Our Site', 1000000);
+function onDeviceReady(){
+	db=window.openDatabase('Database', '1.0', 'Our Site', 200000);
 	db.transaction(CreatTable, errorCB, successCB);
 }
 function CreatTable(tx)
